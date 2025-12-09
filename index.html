@@ -106,7 +106,7 @@ function initMQTT() {
       updateUI();
     }
   });
-}
+
 
     client.on("message", (receivedTopic, message) => {
       if (receivedTopic === topic) {
