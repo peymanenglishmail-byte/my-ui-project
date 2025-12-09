@@ -142,29 +142,28 @@
 
 <div id="tab1" class="tabcontent" style="display:block;">
   <h2>DW String Test Machine</h2>
-  
    <!-- Power Indicator + Error Panel side by side -->
 <div class="power-wrapper">
   <div>
-    <span id="powerIcon" class="power-icon power-off">⏻</span>
-    <span id="powerLabel">Test OFF</span>
+    <span id="string_powerIcon" class="string_power-icon power-off">⏻</span>
+    <span id="string_powerLabel">Test OFF</span>
   </div>
-  <div class="error-panel">
+  <div class="string_error-panel">
     <span class="error-icon">⚠️</span>
-    <span id="errorLabel">No Errors</span>
+    <span id="string_errorLabel">No Errors</span>
   </div>
 </div>
 
   <!-- Panels -->
   <div class="panel">
-    <strong>Total Cycles:</strong> <span id="totalCycles">0</span><br>
+    <strong>Total Cycles:</strong> <span id="string_totalCycles">0</span><br>
       <strong>Current Cycle:</strong> 
-      <span id="currentCycle">0</span>
+      <span id="string_currentCycle">0</span>
       <!-- Bargraph next to current cycle -->
       <div class="bargraph-container">
-        <div id="barFill" class="bargraph-fill"></div>
+        <div id="string_barFill" class="bargraph-fill"></div>
       </div>
-      <span id="barPercent" class="bargraph-percent">0%</span>
+      <span id="string_barPercent" class="bargraph-percent">0%</span>
     <br>
     <strong>Forward Duration:</strong> <span id="forwardDuration">0</span><br>
     <strong>Backward Duration:</strong> <span id="backwardDuration">0</span><br>
@@ -176,12 +175,12 @@
     </div>
     
     <!-- Stations -->
-    <div class="stations">
-      <div class="station"><span id="station1" class="indicator led-off"></span> S1</div>
-      <div class="station"><span id="station2" class="indicator led-off"></span> S2</div>
-      <div class="station"><span id="station3" class="indicator led-off"></span> S3</div>
-      <div class="station"><span id="station4" class="indicator led-off"></span> S4</div>
-      <div class="station"><span id="station5" class="indicator led-off"></span> S5</div>
+    <div class="string_stations">
+      <div class="string_station"><span id="string_station1" class="indicator led-off"></span> S1</div>
+      <div class="string_station"><span id="string_station2" class="indicator led-off"></span> S2</div>
+      <div class="string_station"><span id="string_station3" class="indicator led-off"></span> S3</div>
+      <div class="string_station"><span id="string_station4" class="indicator led-off"></span> S4</div>
+      <div class="string_station"><span id="string_station5" class="indicator led-off"></span> S5</div>
     </div>
   </div>
 </div>
@@ -193,7 +192,6 @@
   <h2>Tab 3</h2>
   <p>Reserved for future monitoring.</p>
 </div>
-
 <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
   
 <script>
@@ -206,21 +204,21 @@
   }
 
   // --- State variables ---
-  let testRunning = false;
-  let cylinderUp = false;
-  let totalCycles = 0;
-  let currentCycle = 0;
-  let forwardDuration = 0;
-  let backwardDuration = 0;
-  let stations = [false, false, false, false, false];
-  let errorMessage = 0;
+  let string_testRunning = false;
+  let string_cylinderUp = false;
+  let string_totalCycles = 0;
+  let string_currentCycle = 0;
+  let string_forwardDuration = 0;
+  let string_backwardDuration = 0;
+  let string_stations = [false, false, false, false, false];
+  let string_errorMessage = 0;
 
   // --- Update UI ---
   function updateUI() {
-    const powerIcon = document.getElementById("powerIcon");
-    const powerLabel = document.getElementById("powerLabel");
-    if (powerIcon && powerLabel) {
-      if (testRunning) {
+    const string_powerIcon = document.getElementById("string_powerIcon");
+    const string_powerLabel = document.getElementById("string_powerLabel");
+    if (string_powerIcon && string_powerLabel) {
+      if (string_testRunning) {
         powerIcon.className = "power-icon power-on";
         powerLabel.textContent = "Test ON";
       } else {
@@ -250,7 +248,7 @@
     const cyl = document.getElementById("cylinder");
     const cylLabel = document.getElementById("cylinderLabel");
     if (cyl && cylLabel) {
-      if (cylinderUp) {
+      if (string_cylinderUp) {
         cyl.textContent = "⬆️";
         cylLabel.textContent = "Cylinder Up";
       } else {
@@ -259,25 +257,25 @@
       }
     }
 
-    const totalEl = document.getElementById("totalCycles");
-    const currentEl = document.getElementById("currentCycle");
-    const forwardEl = document.getElementById("forwardDuration");
-    const backwardEl = document.getElementById("backwardDuration");
-    if (totalEl) totalEl.textContent = totalCycles;
-    if (currentEl) currentEl.textContent = currentCycle;
-    if (forwardEl) forwardEl.textContent = forwardDuration;
-    if (backwardEl) backwardEl.textContent = backwardDuration;
+    const totalEl = document.getElementById("string_totalCycles");
+    const currentEl = document.getElementById("string_currentCycle");
+    const forwardEl = document.getElementById("string_forwardDuration");
+    const backwardEl = document.getElementById("string_backwardDuration");
+    if (totalEl) totalEl.textContent = string_totalCycles;
+    if (currentEl) currentEl.textContent = string_currentCycle;
+    if (forwardEl) forwardEl.textContent = string_forwardDuration;
+    if (backwardEl) backwardEl.textContent = string_backwardDuration;
 
-    const barFill = document.getElementById("barFill");
-    const barPercent = document.getElementById("barPercent");
-    if (barFill && barPercent) {
-      if (totalCycles > 0) {
-        const percent = Math.min(100, (currentCycle / totalCycles) * 100);
-        barFill.style.width = percent + "%";
+    const string_barFill = document.getElementById("string_barFill");
+    const barPercent = document.getElementById("string_barPercent");
+    if (string_barFill && string_barPercent) {
+      if (string_totalCycles > 0) {
+        const percent = Math.min(100, (string_currentCycle / string_totalCycles) * 100);
+        string_barFill.style.width = percent + "%";
         barPercent.textContent = Math.round(percent) + "%";
       } else {
-        barFill.style.width = "0%";
-        barPercent.textContent = "0%";
+        string_barFill.style.width = "0%";
+        string_barPercent.textContent = "0%";
       }
     }
 
@@ -313,15 +311,14 @@
       if (receivedTopic === topic) {
         try {
           const data = JSON.parse(message.toString());
-
-          if ("testRunning" in data) testRunning = data.testRunning;
-          if ("cylinderUp" in data) cylinderUp = data.cylinderUp;
-          if ("totalCycles" in data) totalCycles = data.totalCycles;
-          if ("currentCycle" in data) currentCycle = data.currentCycle;
-          if ("forwardDuration" in data) forwardDuration = data.forwardDuration;
-          if ("backwardDuration" in data) backwardDuration = data.backwardDuration;
-          if ("stations" in data && Array.isArray(data.stations)) stations = data.stations;
-          if ("errorMessage" in data) errorMessage = data.errorMessage;
+          if ("string_testRunning" in data) string_testRunning = data.string_testRunning;
+          if ("string_cylinderUp" in data) string_cylinderUp = data.string_cylinderUp;
+          if ("string_totalCycles" in data) string_totalCycles = data.string_totalCycles;
+          if ("string_currentCycle" in data) string_currentCycle = data.string_currentCycle;
+          if ("string_forwardDuration" in data) string_forwardDuration = data.string_forwardDuration;
+          if ("string_backwardDuration" in data) string_backwardDuration = data.string_backwardDuration;
+          if ("string_stations" in data && Array.isArray(data.stations)) string_stations = data.string_stations;
+          if ("string_errorMessage" in data) string_errorMessage = data.string_errorMessage;
 
           updateUI();
         } catch (err) {
