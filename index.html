@@ -340,11 +340,20 @@
     });
   }
 
+
+
   // --- Initialize ---
+
   window.addEventListener("load", () => {
+  try {
     initMQTT();
-    updateUI();
-  });
+  } catch (err) {
+    console.error("MQTT init failed:", err);
+  }
+  updateUI();
+});
+
+
 </script>
 </body>
 </html>
