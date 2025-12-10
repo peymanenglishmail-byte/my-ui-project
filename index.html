@@ -306,7 +306,7 @@
     });
 
     client.on("message", (receivedTopic, message) => {
-       console.log("Raw message:", message.toString());
+       // console.log("Raw message:", message.toString());
       if (receivedTopic === topic) {
         try {
           const data = JSON.parse(message.toString());
