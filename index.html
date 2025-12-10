@@ -320,7 +320,7 @@
           if ("string_bwd" in data) string_backwardDuration = data.string_bwd;
           if ("string_sts" in data && Array.isArray(data.string_sts)) string_stations = data.string_sts;
           if ("string_err" in data) string_errorMessage = data.string_err;
-          console.error(string_errorMessage);
+          console.error(string_errorMessage.toString());
           updateUI();
         } catch (err) {
           console.error("Invalid JSON:", message.toString());
