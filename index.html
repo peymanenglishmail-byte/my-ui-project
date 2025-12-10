@@ -229,9 +229,9 @@
 
     const errorPanel = document.querySelector(".error-panel");
     const string_errorLabel = document.getElementById("string_errorLabel");
-    if (errorPanel && string_errorLabel) {
+    if (string_errorPanel && string_errorLabel) {
       if (string_errorMessage == 0) {
-        errorPanel.style.display = "none";
+        string_errorPanel.style.display = "none";
       } else {
         errorPanel.style.display = "flex";
         switch(string_errorMessage) {
@@ -320,7 +320,6 @@
           if ("string_bwd" in data) string_backwardDuration = data.string_bwd;
           if ("string_sts" in data && Array.isArray(data.string_sts)) string_stations = data.string_sts;
           if ("string_err" in data) string_errorMessage = data.string_err;
-          console.error(string_errorMessage.toString());
           updateUI();
         } catch (err) {
           console.error("Invalid JSON:", message.toString());
