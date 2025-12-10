@@ -227,23 +227,24 @@
       }
     }
 
-    const errorPanel = document.querySelector(".error-panel");
-    const string_errorLabel = document.getElementById("string_errorLabel");
-    if (string_errorPanel && string_errorLabel) {
-      if (string_errorMessage == 0) {
-        string_errorPanel.style.display = "none";
-      } else {
-        errorPanel.style.display = "flex";
-        switch(string_errorMessage) {
-          case 1: string_errorLabel.textContent = "Station 1 detached"; break;
-          case 2: string_errorLabel.textContent = "Station 2 detached"; break;
-          case 3: string_errorLabel.textContent = "Station 3 detached"; break;
-          case 4: string_errorLabel.textContent = "Station 4 detached"; break;
-          case 5: string_errorLabel.textContent = "Station 5 detached"; break;
-          default: string_errorLabel.textContent = "Unknown Error";
-        }
-      }
+const errorPanel = document.querySelector(".error-panel");
+const string_errorLabel = document.getElementById("string_errorLabel");
+
+if (errorPanel && string_errorLabel) {
+  if (string_errorMessage == 0) {
+    errorPanel.style.display = "none";
+  } else {
+    errorPanel.style.display = "flex";
+    switch(string_errorMessage) {
+      case 1: string_errorLabel.textContent = "Station 1 detached"; break;
+      case 2: string_errorLabel.textContent = "Station 2 detached"; break;
+      case 3: string_errorLabel.textContent = "Station 3 detached"; break;
+      case 4: string_errorLabel.textContent = "Station 4 detached"; break;
+      case 5: string_errorLabel.textContent = "Station 5 detached"; break;
+      default: string_errorLabel.textContent = "Unknown Error";
     }
+  }
+}
 
     const cyl = document.getElementById("cylinder");
     const cylLabel = document.getElementById("cylinderLabel");
